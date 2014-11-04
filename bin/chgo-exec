@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
-source "${0%/*}/../share/chruby/chruby.sh"
+source "${0%/*}/../share/chgo/chgo.sh"
 
 case "$1" in
 	-h|--help)
-		echo "usage: chruby-exec RUBY [RUBYOPTS] -- COMMAND [ARGS...]"
+		echo "usage: chgo-exec RUBY [RUBYOPTS] -- COMMAND [ARGS...]"
 		exit
 		;;
 	-V|--version)
-		echo "chruby version $CHRUBY_VERSION"
+		echo "chgo version $CHRUBY_VERSION"
 		exit
 		;;
 esac
 
 if (( $# == 0 )); then
-	echo "chruby-exec: RUBY and COMMAND required" >&2
+	echo "chgo-exec: GO and COMMAND required" >&2
 	exit 1
 fi
 
@@ -29,11 +29,11 @@ for arg in "$@"; do
 done
 
 if (( $# == 0 )); then
-	echo "chruby-exec: COMMAND required" >&2
+	echo "chgo-exec: COMMAND required" >&2
 	exit 1
 fi
 
-command="chruby $(printf "%q " "${argv[@]}") && $(printf "%q " "$@")"
+command="chgo $(printf "%q " "${argv[@]}") && $(printf "%q " "$@")"
 
 if [[ -t 0 ]]; then exec "$SHELL" -i -l -c "$command"
 else                exec "$SHELL"    -l -c "$command"
