@@ -1,6 +1,6 @@
-NAME=chruby
+NAME=chgo
 VERSION=0.3.8
-AUTHOR=postmodern
+AUTHOR=eunomie
 URL=https://github.com/$(AUTHOR)/$(NAME)
 
 DIRS=etc lib bin sbin share
@@ -39,10 +39,10 @@ clean:
 
 all: $(PKG) $(SIG)
 
-test/opt/rubies:
+test/opt/goes:
 	./test/setup
 
-test: test/opt/rubies
+test: test/opt/goes
 	SHELL=`command -v bash` ./test/runner
 	SHELL=`command -v zsh`  ./test/runner
 
@@ -55,8 +55,8 @@ release: tag download sign
 
 rpm:
 	rpmdev-setuptree
-	spectool -g -R rpm/chruby.spec
-	rpmbuild -ba rpm/chruby.spec
+	spectool -g -R rpm/chgo.spec
+	rpmbuild -ba rpm/chgo.spec
 
 install:
 	for dir in $(INSTALL_DIRS); do mkdir -p $(PREFIX)/$$dir; done

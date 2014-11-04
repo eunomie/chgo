@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Installs and configures chruby.
+# Installs and configures chgo.
 #
 
 set -e
@@ -43,25 +43,25 @@ function warning() {
 #
 # Install chruby
 #
-log "Installing chruby ..."
+log "Installing chgo ..."
 make install
 
 #
 # Configuration
 #
-log "Configuring chruby ..."
+log "Configuring chgo ..."
 
 config="if [ -n \"\$BASH_VERSION\" ] || [ -n \"\$ZSH_VERSION\" ]; then
-	source $PREFIX/share/chruby/chruby.sh
-	source $PREFIX/share/chruby/auto.sh
+	source $PREFIX/share/chgo/chgo.sh
+	source $PREFIX/share/chgo/auto.sh
 fi"
 
 if [[ -d /etc/profile.d/ ]]; then
 	# Bash/Zsh
-	echo "$config" > /etc/profile.d/chruby.sh
+	echo "$config" > /etc/profile.d/chgo.sh
 	log "Setup complete! Please restart the shell"
 else
-	warning "Could not determine where to add chruby configuration."
+	warning "Could not determine where to add chgo configuration."
 	warning "Please add the following configuration where appropriate:"
 	echo
 	echo "$config"
